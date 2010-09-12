@@ -1,0 +1,16 @@
+require "rediary"
+
+
+name = nil
+
+if 1 <= ARGV.size
+  name = ARGV[0]
+else
+  puts "Usage:"
+  puts "ruby create_index user"
+  exit
+end
+
+count = ReDiary.new(name).reindex!
+
+puts "created index (#{count})"

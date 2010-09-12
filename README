@@ -1,0 +1,75 @@
+= ReDiary
+
+  Created by: shunsuk - http://d.hatena.ne.jp/shunsuk/
+  Version: 1.0
+  Contact: http://twitter.com/shunsuk/
+
+自分のはてなダイアリーをローカルで検索・閲覧できます。
+
+
+== Requirements
+
+* MeCab
+* Senna (+ ruby binding)
+* nokogiri (gem install nokogiri)
+
+
+== Installation
+
+1. MeCab, Senna, nokogiriをインストールする。
+
+2. ReDiaryは好きなとこに置いていいよ。
+
+3. はてなダイアリーのデータを用意する。
+
+[管理] - [データ管理] - [インポート/エクスポート] - [ブログのエクスポート]
+「はてなの日記データ形式」でダウンロード。
+ファイル名は、「ユーザー名.xml」がおすすめ（例：shunsuk.xml）。
+ReDiaryのディレクトリに入れてね。
+
+4. インデックスを作成する。
+
+  ruby create_index ユーザー名
+
+現バージョンでは、カレントディレクトリにインデックスファイルができる。
+
+5. aliasを設定しとくと便利。（オプション）
+
+.bashrcやら.zshrcやらに、aliasを設定。
+
+  alias shunsuk='cd /path/to/ReDiary;ruby rediary shunsuk'
+
+
+== How to use
+
+検索。
+
+  % ruby rediary shunsuk "Ruby まつもと"
+
+Installationの5を設定していれば、こう書ける。
+
+  % shunsuk "Ruby まつもと"
+
+閲覧。検索結果の*〜*の数値の部分を指定。
+
+  % ruby rediary shunsuk 1284106109
+
+Installationの5を設定している場合。
+
+  % shunsuk 1284106109
+
+lessコマンドとつなげると便利。
+
+  % shunsuk 1284106109 | less
+
+
+== History
+
+Version: 1.0
+  Initial release
+
+
+== Todo
+
+* インデックスファイルのパスを指定できるようにする。
+* テスト
