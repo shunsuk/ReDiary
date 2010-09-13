@@ -37,6 +37,9 @@ ReDiaryのディレクトリに入れてね。
 
 .bashrcやら.zshrcやらに、aliasを設定。
 
+  export PATH=/path/to/ReDiary:$PATH
+  alias shunsuk='ruby /path/to/ReDiary/rediary shunsuk'
+
 
 == How to use
 
