@@ -1,7 +1,7 @@
 = ReDiary
 
   Created by: shunsuk - http://d.hatena.ne.jp/shunsuk/
-  Version: 1.1
+  Version: 1.2
   Contact: http://twitter.com/shunsuk/
 
 自分のはてなダイアリーをオフラインで検索・閲覧できます。
@@ -51,6 +51,10 @@ Installationの5を設定していれば、こう書ける。
 
   % shunsuk "Ruby まつもと"
 
+クォートで囲む必要がなくなりました。
+
+  % shunsuk Ruby まつもと
+
 閲覧。検索結果の*〜*の数値の部分を指定。
 
   % ruby rediary shunsuk 1284106109
@@ -66,11 +70,14 @@ lessコマンドとつなげると便利。
 
 == History
 
-Version: 1.1
+Version: 1.2 (2010-09-13)
+  AND検索をサポート。
+
+Version: 1.1 (2010-09-13)
   スクリプトを配置したディレクトリ以外で実行すると、
   検索結果が0になるバグを修正。
 
-Version: 1.0
+Version: 1.0 (2010-09-12)
   Initial release
 
 
