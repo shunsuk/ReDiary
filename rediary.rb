@@ -10,28 +10,40 @@ class ReDiary
   end
 
   def search(word)
+    keys_array = []
+
+    word.split(/\s|　/).each do |w|
+      keys = search_a_word(w)
+      keys_array << keys if 0 < keys.size
+    end
+
+    keys = keys_array.inject {|x, y| x & y} || []
+
+    titles = {}
+
+    dir = File.expand_path(File.dirname(__FILE__))
+    File.open("#{dir}/#{@name}.i", 'r') {|f|
+      titles = eval(f.read)
+    }
+
+    keys.map {|x| titles[x]}
+  end
+
+  private
+  def search_a_word(word)
     dir = File.expand_path(File.dirname(__FILE__))
     index = Senna::Index::open("#{dir}/#{@name}")
     r = index.sel(word)
 
-    result = []
+    keys = []
 
     if r
-      titles = {}
-
-      File.open("#{dir}/#{@name}.i", 'r') {|f|
-        titles = eval(f.read)
-      }
-
       r.each do |key, score|
-        title = titles[key]
-        result << title
-
-        yield key, title if block_given?
+        keys << key
       end
     end
 
-    result
+    keys
   end
 
   def [](identifer)
