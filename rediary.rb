@@ -3,12 +3,6 @@ require "nokogiri"
 require "senna"
 
 
-class String
-  def append_null
-    (self.unpack("C*") + [0x00]).pack("C*")
-  end
-end
-
 class ReDiary
   def initialize(name)
     @name = name
@@ -17,7 +11,7 @@ class ReDiary
 
   def search(word)
     index = Senna::Index::open(@name)
-    r = index.sel(word.append_null)
+    r = index.sel(word)
 
     result = []
 
@@ -63,7 +57,7 @@ class ReDiary
       f.puts "{"
 
       each_entry do |id, title, body|
-        index.upd(id, nil, body.append_null)
+        index.upd(id, nil, body)
         f.puts %Q{"#{id}" => %q{#{title}},}
         count += 1
 
