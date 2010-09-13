@@ -37,8 +37,6 @@ ReDiaryのディレクトリに入れてね。
 
 .bashrcやら.zshrcやらに、aliasを設定。
 
-  alias shunsuk='cd /path/to/ReDiary;ruby rediary shunsuk'
-
 
 == How to use
 
