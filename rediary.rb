@@ -50,13 +50,14 @@ class ReDiary
   end
 
   def reindex!
-    index = Senna::Index.create(@name, 0, 0, 0, Senna::ENC_UTF8)
+    dir = File.expand_path(File.dirname(__FILE__))
+    index = Senna::Index.create("#{dir}/#{@name}", 0, 0, 0, Senna::ENC_UTF8)
     # N-gram
     # index = Senna::Index.create(@name, 0, (Senna::INDEX_NORMALIZE | Senna::INDEX_NGRAM), 0, Senna::ENC_UTF8)
 
     count = 0
 
-    File.open("#{@name}.i", 'w') {|f|
+    File.open("#{dir}/#{@name}.i", 'w') {|f|
       f.puts "{"
 
       each_entry do |id, title, body|
@@ -77,7 +78,8 @@ class ReDiary
   end
 
   def each_entry
-    doc = Nokogiri.HTML(open(@file_name))
+    dir = File.expand_path(File.dirname(__FILE__))
+    doc = Nokogiri.HTML(open("#{dir}/#{@file_name}"))
 
     doc.search("//diary/day").each do |day|
       date = day.at("@date").value
