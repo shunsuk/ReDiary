@@ -10,7 +10,7 @@ if 2 <= ARGV.size
   if ARGV[1] =~ /^[0-9]+$/
     id = ARGV[1]
   else
-    word = ARGV[1]
+    word = ARGV[1..(ARGV.size - 1)] * " "
   end
 else
   puts "Usage:"

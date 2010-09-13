@@ -14,7 +14,7 @@ class ReDiary
 
     word.split(/\s|　/).each do |w|
       keys = search_a_word(w)
-      keys_array << keys if 0 < keys.size
+      keys_array << keys
     end
 
     keys = keys_array.inject {|x, y| x & y} || []
