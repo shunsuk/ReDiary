@@ -10,7 +10,8 @@ class ReDiary
   end
 
   def search(word)
-    index = Senna::Index::open(@name)
+    dir = File.expand_path(File.dirname(__FILE__))
+    index = Senna::Index::open("#{dir}/#{@name}")
     r = index.sel(word)
 
     result = []
@@ -18,7 +19,7 @@ class ReDiary
     if r
       titles = {}
 
-      File.open("#{@name}.i", 'r') {|f|
+      File.open("#{dir}/#{@name}.i", 'r') {|f|
         titles = eval(f.read)
       }
 
@@ -50,6 +51,8 @@ class ReDiary
 
   def reindex!
     index = Senna::Index.create(@name, 0, 0, 0, Senna::ENC_UTF8)
+    # N-gram
+    # index = Senna::Index.create(@name, 0, (Senna::INDEX_NORMALIZE | Senna::INDEX_NGRAM), 0, Senna::ENC_UTF8)
 
     count = 0
 
