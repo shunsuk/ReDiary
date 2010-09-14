@@ -29,23 +29,6 @@ class ReDiary
     keys.map {|x| titles[x]}
   end
 
-  private
-  def search_a_word(word)
-    dir = File.expand_path(File.dirname(__FILE__))
-    index = Senna::Index::open("#{dir}/#{@name}")
-    r = index.sel(word)
-
-    keys = []
-
-    if r
-      r.each do |key, score|
-        keys << key
-      end
-    end
-
-    keys
-  end
-
   def [](identifer)
     identifer = identifer.to_s
 
@@ -105,5 +88,22 @@ class ReDiary
         end
       end
     end
+  end
+
+  private
+  def search_a_word(word)
+    dir = File.expand_path(File.dirname(__FILE__))
+    index = Senna::Index::open("#{dir}/#{@name}")
+    r = index.sel(word)
+
+    keys = []
+
+    if r
+      r.each do |key, score|
+        keys << key
+      end
+    end
+
+    keys
   end
 end
