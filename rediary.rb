@@ -34,9 +34,9 @@ class ReDiary
 
     result = nil
 
-    each_entry do |id, title, body|
-      if id == identifer
-        result = body
+    each_entry do |entry|
+      if entry.id == identifer
+        result = entry
         break
       end
     end
@@ -55,13 +55,12 @@ class ReDiary
     File.open("#{dir}/#{@name}.i", 'w') {|f|
       f.puts "{"
 
-      each_entry do |id, title, body|
-        index.upd(id, nil, body)
-        f.puts %Q{"#{id}" => %q{#{title}},}
+      each_entry do |entry|
+        index.upd(entry.id, nil, entry.body)
+        f.puts %Q{"#{entry.id}" => %q{#{entry.title}},}
         count += 1
 
-        #
-        puts id
+        yield entry if block_given?
       end
 
       f.puts "}"
@@ -76,18 +75,37 @@ class ReDiary
     dir = File.expand_path(File.dirname(__FILE__))
     doc = Nokogiri.HTML(open("#{dir}/#{@file_name}"))
 
+    entries = []
+
     doc.search("//diary/day").each do |day|
       date = day.at("@date").value
 
       day.children.each do |body|
         if body.name == "text"
-          body.text.scan(/^\*[0-9]+\*[^\r\n|\r|\n]+/) do |title|
-            id = title.scan(/^\*([0-9]+)\*/)[0][0]
-            yield id, title, body.text
+          entry = nil
+
+          body.text.each_line do |line|
+            if line =~ /^\*([0-9]+)\*[^\r\n|\r|\n]+/
+              if entry
+                entries << entry
+                yield entry if block_given?
+              end
+
+              entry = Entry.new($1, $&, "") 
+            end
+
+            entry.body += line if entry
+          end
+
+          if entry
+            entries << entry
+            yield entry if block_given?
           end
         end
       end
     end
+
+    entries
   end
 
   private
@@ -106,4 +124,15 @@ class ReDiary
 
     keys
   end
+end
+
+
+class Entry
+  def initialize(id, title, body)
+    @id = id
+    @title = title
+    @body = body
+  end
+
+  attr_accessor :id, :title, :body
 end

@@ -1,7 +1,7 @@
 = ReDiary
 
   Created by: shunsuk - http://d.hatena.ne.jp/shunsuk/
-  Version: 1.2
+  Version: 1.3
   Contact: http://twitter.com/shunsuk/
 
 自分のはてなダイアリーをオフラインで検索・閲覧できます。
@@ -70,6 +70,10 @@ lessコマンドとつなげると便利。
 
 == History
 
+Version: 1.3 (2010-09-15)
+  スペックファイルを追加。
+  スペックに合うように修正。
+
 Version: 1.2 (2010-09-13)
   AND検索をサポート。
 
@@ -84,4 +88,4 @@ Version: 1.0 (2010-09-12)
 == Todo
 
 * インデックスファイルのパスを指定できるようにする。
-* テスト
+

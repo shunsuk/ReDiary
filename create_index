@@ -11,6 +11,8 @@ else
   exit
 end
 
-count = ReDiary.new(name).reindex!
+count = ReDiary.new(name).reindex! do |entry|
+  puts entry.id
+end
 
 puts "created index (#{count})"

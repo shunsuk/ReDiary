@@ -20,7 +20,7 @@ end
 
 
 if id
-  puts ReDiary.new(name)[id]
+  puts ReDiary.new(name)[id].body
 else
   r = ReDiary.new(name).search(word)
   puts "#{word} : #{r.size}"

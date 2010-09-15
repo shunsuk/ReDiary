@@ -1,2 +1,4 @@
 shunsuk.*
+test.*
+!test.xml
 .DS_Store
