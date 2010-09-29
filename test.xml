@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diary>
+<day date="2006-12-19" title="">
+<body>
+*1234567890*[書式]アスタリスク*入り*日記
+アスタリスク*入り*日記です。
+
+アスタリスク*入り*日記です。
+
+** 見出し
+
+見出しのテストです。
+
+見出しのテストです。
+</body>
+</day>
+<day date="2008-01-31" title="">
+<body>
+*1234567891*[複数][最初]複数日記（最初）
+複数日記（最初）です。
+
+*1234567892*[複数][中]複数日記（中）
+複数日記（中）です。
+
+*1234567893*[複数][最後]複数日記（最後）
+複数日記（最後）です。
+</body>
+</day>
+</day>
+<day date="2009-12-22" title="">
+<body>
+*1234567895*[コメント]コメント付き日記
+コメント付き日記です。
+</body>
+<comments>
+<comment>
+<username>user1</username>
+<body>コメント1</body>
+<timestamp>1220500930</timestamp>
+</comment>
+<comment>
+<username>user2</username>
+<body>コメント2</body>
+<timestamp>1220567513</timestamp>
+</comment>
+</comments>
+</day>
+</diary>
